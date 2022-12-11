@@ -19,6 +19,10 @@ const App = () => {
     const [type, setType] = useState();
     const [autocomplete, setAutocomplete] = useState(null);
 
+    const [start, setStart] = useState();
+    const [end, setEnd] = useState();
+    const [ location, setLocation ] = useState([]);
+
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(({ coords: {latitude, longitude} }) => {
             setCordinates({ lat: latitude, lng: longitude });
@@ -49,7 +53,7 @@ const App = () => {
         <Container fluid>
             <Header onPlaceChanged={onPlaceChanged} onLoad={onLoad}/>
             <Row >
-                <Col xs={12} md={3} > <Calendar/> </Col>
+                <Col xs={12} md={3} > <Calendar start={start} setStart={setStart} end={end} setEnd={setEnd} location={location} setLocation={setLocation}/> </Col>
                 <Col xs={12} md={3} > <List places={places} isLoading={isLoading} type={type} setType={setType} childClicked={childClicked}/> </Col>
                 <Col xs={12} md={6} > <Map setChildClicked={setChildClicked} setCordinates={setCordinates} setBounds={setBounds} coordinates={coordinates} places={places}/> 
                 </Col>
